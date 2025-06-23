@@ -28,7 +28,7 @@ jobs:
             if [ -d "ArticlesDomain" ]; then
               cd ArticlesDomain && git pull origin test && cd ..
             else
-              git clone -b test $REPO_CODE
+              git clone -b test $REPO_CODE ArticlesDomain
             fi
 
             cd ~/deploy-envs
@@ -38,23 +38,17 @@ jobs:
               git clone $REPO_ENVS
             fi
 
+            # Copiar los .env al código
             if [ -d ~/deploy-envs/ArticlesDomain-envs/ArticlesDomain ]; then
-              # Para copiar también archivos ocultos (.env)
               shopt -s dotglob
               cp -r -f ~/deploy-envs/ArticlesDomain-envs/ArticlesDomain/* ~/deploy-code/ArticlesDomain/
               shopt -u dotglob
             fi
 
             docker login -u bfury0329 -p "${{ secrets.DOCKER_HUB_PASSWORD }}"
-
             docker network inspect app-network >/dev/null 2>&1 || docker network create app-network
 
-            cd ~/deploy-code
-            if [ -d "ArticlesDomain" ]; then
-              cd ArticlesDomain && git pull origin test && cd ..
-            else
-              git clone -b test $REPO_CODE ArticlesDomain
-            fi
+            cd ~/deploy-code/ArticlesDomain
 
             for dir in */ ; do
               service=$(basename "$dir")
