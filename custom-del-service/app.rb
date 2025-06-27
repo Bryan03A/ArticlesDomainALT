@@ -47,7 +47,7 @@ conn.exec <<-SQL
   );
 SQL
 
-# Ruta para obtener los modelos del catálogo desde MongoDB
+# Ruta para obtener los modelos del catálogo desde MongoDBa
 get '/models' do
   models = models_collection.find.map { |model| model }
   models.to_json
