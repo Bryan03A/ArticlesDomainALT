@@ -10,12 +10,12 @@ require 'dotenv/load'
 require 'active_record'
 require 'rack/cors'
 
-use Rack::Cors do
-  allow do
-    origins '*' # Puedes cambiar '*' por el dominio específico si deseas restringir más el acceso a 2
-    resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
-  end
-end
+#use Rack::Cors do
+#  allow do
+#    origins '*' # Puedes cambiar '*' por el dominio específico si deseas restringir más el acceso a 2
+#    resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+#  end
+#end
 
 # Configuración de la conexión a MongoDB
 client = Mongo::Client.new(ENV['MONGO_URI'])
@@ -55,7 +55,7 @@ end
 
 # Function to verify the token with the auth-service
 def verify_token(token)
-  uri = URI.parse("http://34.200.3.211:5001/profile")
+  uri = URI.parse("http://54.90.161.226/auth/profile")
   req = Net::HTTP::Get.new(uri)
   req['Authorization'] = "Bearer #{token}"
 

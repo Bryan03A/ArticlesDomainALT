@@ -11,15 +11,15 @@ require 'active_record'
 require_relative 'price_calculator' # Requerir el archivo price_calculator.rba
 require 'rack/cors'
 
-use Rack::Cors do
-  allow do
-    origins 'http://3.212.132.24:8080' # Agrega aquí los dominios permitidos
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :delete, :options],
-      credentials: true # Permitir credenciales (cookies, headers de autenticación) 2
-  end
-end
+#use Rack::Cors do
+#  allow do
+#    origins 'http://3.212.132.24:8080' # Agrega aquí los dominios permitidos
+#    resource '*',
+#      headers: :any,
+#      methods: [:get, :post, :put, :delete, :options],
+#      credentials: true # Permitir credenciales (cookies, headers de autenticación) 2
+#  end
+#end
 
 # Configuración de la conexión a MongoDB
 client = Mongo::Client.new(ENV['MONGO_URI'])
@@ -75,7 +75,7 @@ end
 
 # Function to verify the token with the auth-service
 def verify_token(token)
-  uri = URI.parse("http://34.200.3.211:5001/profile")
+  uri = URI.parse("http://54.90.161.226/auth/profile")
   req = Net::HTTP::Get.new(uri)
   req['Authorization'] = "Bearer #{token}"
 
