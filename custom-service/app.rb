@@ -130,7 +130,7 @@ post '/customize-model' do
     )
 
     # Ahora, hacer la solicitud POST a order-status-service para crear la orden
-    uri = URI.parse("http://98.83.63.33:5017/orders/")
+    uri = URI.parse("http://54.90.161.226/order-status/orders/")
     http = Net::HTTP.new(uri.host, uri.port)
 
     # Parámetros para la orden
